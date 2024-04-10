@@ -1,0 +1,43 @@
+
+ruAlphabet1 = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя"
+
+def encode(message, key, lang):
+    result = ""
+    if language.get() == "ru":
+        key_indexes = []
+        for x in key:
+            key_indexes.append(ruAlphabet1.find(x))
+        i = 0
+        for x in message:
+            if i == len(key_indexes):
+                i = 0
+            index = ruAlphabet0.find(x) + key_indexes[i]
+            if index > len(ruAlphabet0) - 1:
+                index -= len(ruAlphabet0)
+            result += ruAlphabet0[index]
+            i += 1
+    return result
+
+def decode(message, key, lang):
+    result = ""
+    if lang == "ru":
+        key_indexes = []
+        for x in key:
+            key_indexes.append(ruAlphabet1.find(x))
+        i = 0
+        for x in message:
+            if x not in ruAlphabet1:
+                result += ruAlphabet1[x]
+                continue
+            if i == len(key_indexes):
+                i = 0
+            index = ruAlphabet1.find(x) - key_indexes[i]
+            if index < 0:
+                index += len(ruAlphabet1)
+            result += ruAlphabet1[index]
+            i += 1
+    return result
+    
+
+
+print(decode("иъмъ пкияцйж рзебщн", "жизнь", "ru"))
